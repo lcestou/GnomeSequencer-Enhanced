@@ -21,7 +21,7 @@ end
 
 --- Add a sequence to the library
 local function GSAddSequenceToCollection(sequenceName, sequence, version)
-  --Perform some validation checks on the Sequence.
+  -- Perform some validation checks on the Sequence.
   if GSE.isEmpty(sequence.specID) then
     -- set to currentSpecID
     sequence.specID = tonumber(GSE.GetCurrentSpecID())
@@ -30,7 +30,7 @@ local function GSAddSequenceToCollection(sequenceName, sequence, version)
     -- set to unknown author
     sequence.author = "Unknown Author"
   end
-  -- CHeck for colissions
+  -- Check for collisions
   local found = false
   if not GSE.isEmpty(GSMasterOptions.SequenceLibrary[sequenceName]) then
     if not GSE.isEmpty(GSMasterOptions.SequenceLibrary[sequenceName][version]) then
@@ -38,11 +38,11 @@ local function GSAddSequenceToCollection(sequenceName, sequence, version)
     end
   end
   if found then
-    -- check if source the same.  If so ignore
+    -- Check if source the same.  If so ignore
     if sequence.source ~= GSMasterOptions.SequenceLibrary[sequenceName][version].source then
-      -- different source.  if local Ignore
+      -- Different source.  If local Ignore
       if sequence.source == GSStaticSourceLocal then
-        -- local version - add as new version
+        -- Local version - Add as new version
         GSAddSequenceToCollection(sequenceName, sequence, GSGetNextSequenceVersion(sequenceName))
       end
     end
@@ -61,7 +61,7 @@ local function GSAddSequenceToCollection(sequenceName, sequence, version)
 end
 
 
---- Load sequences found in addon Mods.  authorversion is the version of hte mod where the collection was loaded from.
+--- Load sequences found in addon Mods.  authorversion is the version of the mod where the collection was loaded from.
 local function GSImportLegacyMacroCollections(str, authorversion)
   if GSE.isEmpty(authorversion) then
     authorversion = 1
